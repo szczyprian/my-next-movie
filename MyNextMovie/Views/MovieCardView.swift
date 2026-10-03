@@ -20,7 +20,19 @@ struct MovieCardView: View {
     //   Both texts get `.lineLimit(cardTextMaxLines)`.
     // Split the body into computed properties, as in `MovieDetailView`.
     var body: some View {
-        Text(movie.title)
+        VStack(alignment: .leading, spacing: spacingSmall ) {
+            PosterView(movie: movie).overlay(alignment: .topTrailing) {
+                RatingBadge(movie: movie)
+            }
+            
+        
+
+        }
+        VStack(alignment: .leading, spacing: spacingTiny) {
+            Text(movie.title).font(.subheadline.weight(.semibold))
+            Text(movieSubtitle(movie))
+                .lineLimit(cardTextMaxLines)
+        }
     }
 }
 

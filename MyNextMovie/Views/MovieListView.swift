@@ -68,9 +68,16 @@ private struct MovieGrid: View {
     // - columns: one `GridItem(.adaptive(minimum: gridMinimumColumnWidth), spacing: spacingLarge)`,
     //   so the grid fits as many columns as the screen width allows,
     // - row spacing: `spacingExtraLarge`,
-    // - content: `ForEach(movies)` with a `MovieGridItem` for every movie.
+    // - content: `ForEach(movies)` with a `MovieGridItem` for every movie
+    
+    
+
     private var grid: some View {
-        Text("\(movies.count) movies, build the grid here")
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: gridMinimumColumnWidth, maximum: 300), spacing: spacingLarge)]) {
+            ForEach(movies) { movie in
+                MovieGridItem(movie: movie)
+            }
+        }
     }
 }
 
@@ -83,7 +90,11 @@ private struct MovieGridItem: View {
     // with `.navigationDestination(for: Movie.self)`.
     // Add `.buttonStyle(.plain)`, otherwise the whole card turns blue.
     var body: some View {
-        MovieCardView(movie: movie)
+        NavigationLink(value: movie) {
+            
+            
+            MovieCardView(movie: movie)
+        }
     }
 }
 

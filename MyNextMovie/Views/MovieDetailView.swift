@@ -77,7 +77,13 @@ private struct MovieInfo: View {
     // - `overview`: the header `Text("Overview")` in `.headline`
     //   and `Text(movie.overview)` in `.secondary` under it.
     var body: some View {
-        Text(movie.title)
+        VStack(alignment: .leading, spacing: spacingSmall) {
+            Text(movie.title).fontWeight(.bold)
+            
+            GenreRow(genreIds:knownGenreIds(movie))
+            
+            
+        }
     }
 }
 
