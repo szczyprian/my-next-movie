@@ -91,7 +91,7 @@ func knownGenreIds(_ movie: Movie) -> [Int] {
     // the ids for which `positionInGenreTable` is not `genreNotInTable`.
     var genreId = [Int]()
     for movieId in movie.genreIds {
-        if(positionInGenreTable(movieId) != genreNotInTable){
+        if positionInGenreTable(movieId) != genreNotInTable {
             genreId.append(movieId)
         }
     }
@@ -111,5 +111,14 @@ func mainGenreId(_ movie: Movie) -> Int {
 func movieSubtitle(_ movie: Movie) -> String {
     // TODO: Lab 1, task 1. Collect the non-empty parts, `releaseYear(movie)` and
     // `genreName(mainGenreId(movie))`, in an array and join them with `textSeparator`.
-    return ""
-}
+    if releaseYear(movie).isEmpty && genreName(mainGenreId(movie)).isEmpty {
+        return ""
+    }else if releaseYear(movie).isEmpty{
+        
+        return genreName(mainGenreId(movie))
+    }else if  genreName(mainGenreId(movie)).isEmpty {
+        return releaseYear(movie)
+    }else{
+        return releaseYear(movie) + textSeparator + genreName(mainGenreId(movie))
+    }
+    }

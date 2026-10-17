@@ -32,7 +32,13 @@ func releaseYear(_ movie: Movie) -> String {
     // TODO: Lab 1, task 1. Return the first `releaseYearLength` characters of
     // `movie.releaseDate`, or "" when the date is shorter than that.
     // Hint: `String(text.prefix(count))`.
-    return String(movie.releaseDate.prefix(releaseYearLength))
+    
+    if movie.releaseDate.count < releaseYearLength || movie.releaseDate.isEmpty {
+        return ""
+    }
+    else{
+        return String(movie.releaseDate.prefix(releaseYearLength))
+    }
 }
 
 /// 8.24 -> "8.2"
@@ -52,7 +58,11 @@ func ratingWithStar(_ movie: Movie) -> String {
 func yearAndRating(_ movie: Movie) -> String {
     // TODO: Lab 1, task 2. Join `releaseYear(movie)` and `ratingWithStar(movie)`
     // with `textSeparator`. Leave the year and the separator out when the year is "".
-    return releaseYear(movie) + ratingWithStar(movie)
+    if releaseYear(movie).isEmpty {
+        return ratingWithStar(movie)
+    }else{
+        return releaseYear(movie) + textSeparator + ratingWithStar(movie)
+    }
 }
 
 /// Poster address on the TMDB image server, nil when the movie has no poster.

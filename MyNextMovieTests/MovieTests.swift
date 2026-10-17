@@ -27,14 +27,17 @@ struct MovieTests {
 
     // TODO: Lab 1, task 2. Check that `ratingWithStar` puts "★ " before the rating:
     // a movie with `voteAverage: 8.24` gives "★ 8.2".
-    @Test(.disabled("Lab 1, task 2: write this test"))
+    @Test
     func ratingWithStarStartsWithStar() {
+        #expect(ratingWithStar(makeMovie(voteAverage: 8.24)) == "★ 8.2")
     }
 
     // TODO: Lab 1, task 2. Check `yearAndRating` for a movie with a release date
     // ("2014-11-05", 8.4 -> "2014 · ★ 8.4") and for one without ("", 8.4 -> "★ 8.4").
-    @Test(.disabled("Lab 1, task 2: write this test"))
+    @Test
     func yearAndRatingLeavesOutUnknownYear() {
+        #expect(yearAndRating(makeMovie(releaseDate: "2014-11-05",voteAverage: 8.4)) == "2014 · ★ 8.4")
+        #expect(yearAndRating(makeMovie(releaseDate: "",voteAverage: 8.4)) == "★ 8.4")
     }
 
     @Test func posterURLUsesTMDBImageHost() {
@@ -58,8 +61,9 @@ struct MovieTests {
 
     // TODO: Lab 1, task 1. Check `movieSubtitle` when a part is missing:
     // only a genre gives "Science Fiction", only a date gives "1999", neither gives "".
-    @Test(.disabled("Lab 1, task 1: write this test"))
+    @Test
     func subtitleLeavesOutMissingParts() {
+        #expect(movieSubtitle(makeMovie(releaseDate: "", genreIds: [genreIdScienceFiction])) == "Science Fiction")
     }
 }
 
