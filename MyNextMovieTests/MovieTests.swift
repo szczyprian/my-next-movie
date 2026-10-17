@@ -102,8 +102,10 @@ struct GenreTests {
     // TODO: Lab 1, task 1. Check that `mainGenreId` skips unknown ids:
     // [genreIdUnknownToTMDB, genreIdScienceFiction, genreIdAction] gives genreIdScienceFiction,
     // and a movie with only [genreIdUnknownToTMDB] gives noGenreId.
-    @Test(.disabled("Lab 1, task 1: write this test"))
+    @Test
     func mainGenreIdIsFirstKnownGenre() {
+        
+        #expect(mainGenreId(makeMovie(genreIds: [genreIdUnknownToTMDB, genreIdScienceFiction, genreIdAction])) == genreIdScienceFiction)
     }
 }
 
