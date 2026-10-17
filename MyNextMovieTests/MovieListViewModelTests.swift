@@ -32,7 +32,19 @@ struct MovieListViewModelTests {
     // TODO: Lab 1. Check that `loadIfNeeded` calls the loader only once.
     // Count the calls in a variable that the closure passed as `loadMovies` increments,
     // call `loadIfNeeded()` twice and expect a count of 1. The test has to be `async`.
-    @Test(.disabled("Lab 1: write this test"))
-    func loadIfNeededLoadsOnlyOnce() {
+    @Test//(.disabled("Lab 1: write this test"))
+    func loadIfNeededLoadsOnlyOnce() async {
+        var loadMovies = 0
+        let viewModel = MovieListViewModel(loadMovies: { sampleMovies })
+        await viewModel.loadIfNeeded()
+        loadMovies += 1
+        await viewModel.loadIfNeeded()
+        loadMovies += 1
+        
+        #expect(loadMovies == 1)
+        
+        
+        
+        
     }
 }

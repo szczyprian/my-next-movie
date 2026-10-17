@@ -90,11 +90,11 @@ private struct MovieGridItem: View {
     // with `.navigationDestination(for: Movie.self)`.
     // Add `.buttonStyle(.plain)`, otherwise the whole card turns blue.
     var body: some View {
-        NavigationLink(value: movie) {
+        NavigationLink(value: movie){
             
             
             MovieCardView(movie: movie)
-        }
+        }.buttonStyle(.plain)
     }
 }
 
