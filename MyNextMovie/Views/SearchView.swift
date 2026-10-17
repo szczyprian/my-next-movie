@@ -80,14 +80,28 @@ private struct GenreFilter: View {
     // Give the `HStack` `.padding(.horizontal)` and `.padding(.vertical, spacingSmall)`.
     // Draw every chip with `genreFilterChip(genre.id)`.
     var body: some View {
-        EmptyView()
+        ScrollView(.horizontal,showsIndicators: false){
+            HStack(spacing:spacingSmall){
+                ForEach(genreTable){ genre in genreFilterChip(genre.id)
+                    
+                    
+                }.padding(.horizontal).padding(.vertical, spacingSmall)
+            }
+        }
     }
 
     // TODO: Lab 2, task 2. A `Button` that calls `toggleGenre(genreId)`, with
     // `GenreChip(genreId:isSelected:)` as its label. The chip is selected when
     // `genreId == selectedGenreId`. Add `.buttonStyle(.plain)`.
+    
     private func genreFilterChip(_ genreId: Int) -> some View {
         GenreChip(genreId: genreId)
+        Button(action: {
+            toggleGenre(genreId)
+        }){
+            
+        }
+ 
     }
 }
 
