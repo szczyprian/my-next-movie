@@ -82,8 +82,8 @@ private struct GenreFilter: View {
     var body: some View {
         ScrollView(.horizontal,showsIndicators: false){
             HStack(spacing:spacingSmall){
-                ForEach(genreTable){ genre in genreFilterChip(genre.id)
-                    
+                ForEach(genreTable){
+                    genre in genreFilterChip(genre.id)
                     
                 }.padding(.horizontal).padding(.vertical, spacingSmall)
             }
@@ -95,12 +95,10 @@ private struct GenreFilter: View {
     // `genreId == selectedGenreId`. Add `.buttonStyle(.plain)`.
     
     private func genreFilterChip(_ genreId: Int) -> some View {
-        GenreChip(genreId: genreId)
-        Button(action: {
+        
+        Button(genreName(genreId)){
             toggleGenre(genreId)
-        }){
-            
-        }
+        }.buttonStyle(.plain)
  
     }
 }
@@ -114,7 +112,14 @@ private struct SearchResults: View {
     // Otherwise a `List(movies)` with a `SearchResultRow` for every movie and `.listStyle(.plain)`.
     // An `if` in `body` needs `@ViewBuilder`, as `content` in `SearchView` has.
     var body: some View {
-        Text("\(movies.count) movies, build the list here")
+        if(movies.isEmpty){
+            ContentUnavailableView.search(text: query)
+        }else{
+            List(movies){ movie in
+                SearchResultRow(movie: movie)
+            }.listStyle(.plain)
+        }
+        //Text("\(movies.count) movies, build the list here")
     }
 }
 
@@ -132,7 +137,16 @@ private struct SearchResultRow: View {
     //   `Text(movieSubtitle(movie))` in `.subheadline` and `Text(ratingWithStar(movie))`
     //   in `.caption`. Both last texts are `.secondary`.
     var body: some View {
-        Text(movie.title)
+        NavigationLink(value: movie){
+            HStack(spacing: spacingMedium){
+                PosterView(movie: movie, cornerRadius: thumbnailCornerRadius)
+                VStack(alignment:.leading,spacing: spacingExtraSmall){
+                    Text(movie.title).font(.headline).lineLimit(searchResultTitleMaxLines)
+                    Text(movieSubtitle(movie)).font(.subheadline)
+                    Text(ratingWithStar(movie)).font(.caption)
+                }
+            }
+        }
     }
 }
 
