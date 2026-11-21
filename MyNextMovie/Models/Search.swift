@@ -9,17 +9,17 @@ func filterMovies(_ movies: [Movie], query: String, genreId: Int) -> [Movie] {
     // - `genreId` is `noGenreId`, or `movie.genreIds` contains `genreId`,
     // - the trimmed query is empty, or `movieContainsText(movie, trimmedQuery)`.
     // Skip a movie with `continue` instead of nesting one `if` in another.
-    var movies: [Movie] = []
+    var filteredMovies: [Movie] = []
     let trimmedQuery = query.trimmingCharacters(in: .whitespaces)
     for movie in movies {
         if (genreId == noGenreId || movie.genreIds.contains(genreId)) && (trimmedQuery.isEmpty || movieContainsText(movie, trimmedQuery)){
-            movies.append(movie)
+            filteredMovies.append(movie)
         }
     }
     
     
     
-    return movies
+    return filteredMovies
 }
 
 private func movieContainsText(_ movie: Movie, _ searchedText: String) -> Bool {
