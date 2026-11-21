@@ -96,14 +96,16 @@ private struct GenreFilter: View {
     
     private func genreFilterChip(_ genreId: Int) -> some View {
         
-        Button(genreName(genreId)){
-            toggleGenre(genreId)
+        Button(action: {toggleGenre(genreId)}){
+           GenreChip(genreId: genreId,isSelected: genreId==selectedGenreId)
+            
         }.buttonStyle(.plain)
  
     }
 }
 
-/// Found movies as a list, or a "no results" message when nothing matches.
+/// Found movies as a list, or a "no results" message when nothing matches
+
 private struct SearchResults: View {
     let movies: [Movie]
     let query: String
@@ -111,6 +113,7 @@ private struct SearchResults: View {
     // TODO: Lab 2, task 2. When `movies` is empty, show `ContentUnavailableView.search(text: query)`.
     // Otherwise a `List(movies)` with a `SearchResultRow` for every movie and `.listStyle(.plain)`.
     // An `if` in `body` needs `@ViewBuilder`, as `content` in `SearchView` has.
+    
     var body: some View {
         if(movies.isEmpty){
             ContentUnavailableView.search(text: query)

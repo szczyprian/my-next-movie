@@ -48,6 +48,8 @@ final class SearchViewModel {
         // set it to `noGenreId`. Otherwise set it to `genreId`.
         if(selectedGenreId == genreId){
             selectedGenreId = noGenreId
+        }else{
+            selectedGenreId = genreId
         }
     }
 }
